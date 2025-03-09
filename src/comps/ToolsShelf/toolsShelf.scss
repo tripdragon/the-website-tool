@@ -1,0 +1,29 @@
+
+#toolsShelf{
+    position: fixed;
+    
+    cursor: move;
+    padding: 10px;
+    backgroundColor: gray;
+    color: black;
+    borderRadius: 5px;
+    boxShadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    width: 100px;
+
+    #handle{
+        border: solid 1px blue;
+        user-select: none;
+    }
+
+    #toolbar-content {
+      padding: 10px;
+      backgroundColor: gray;
+      color: white;
+      borderRadius: 0 0 5px 5px;
+
+    };
+
+}
+
+
