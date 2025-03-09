@@ -4,10 +4,10 @@
     
     cursor: move;
     padding: 10px;
-    backgroundColor: gray;
+    background-color: gray;
     color: black;
-    borderRadius: 5px;
-    boxShadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 2000;
     width: 100px;
 
@@ -18,9 +18,9 @@
 
     #toolbar-content {
       padding: 10px;
-      backgroundColor: gray;
+      background-color: gray;
       color: white;
-      borderRadius: 0 0 5px 5px;
+      border-radius: 0 0 5px 5px;
 
     };
 

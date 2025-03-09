@@ -66,7 +66,7 @@ const SelectorTool = forwardRef( (props, ref) => {
         id="inspector-toggle"
         onClick={() => setIsActive((prev) => !prev)}
         style={{
-          backgroundColor: isActive ? "#ff4d4d" : "#007bff",
+          background-color: isActive ? "#ff4d4d" : "#007bff",
         }}
       >*/}
       {/*  {isActive ? "♪" : "☛"}

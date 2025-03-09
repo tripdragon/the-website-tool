@@ -5,17 +5,17 @@
 	#inspector-toggle{
       color: #fff;
       border: none;
-      borderRadius: 5px;
+      border-radius: 5px;
       cursor: pointer;
-      zIndex: 200;
+      z-index: 200;
 	}
 
 	.is-active{
 	    position: fixed;
 	    border: 2px solid red;
-	    backgroundColor: rgba(255, 0, 0, 0.1);
+	    background-color: rgba(255, 0, 0, 0.1);
 	    pointer-events: none;
-	    zIndex: 101;
+	    z-index: 101;
 	}
 
 }
