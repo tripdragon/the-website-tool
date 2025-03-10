@@ -10,7 +10,7 @@ import './selectortool.scss';
 // export default function SelectorTool() {
 const SelectorTool = forwardRef( (props, ref) => {
 
-  const { isSelectorActive, deactivateButton } = useSelectorStore();
+  const { isSelectorActive, deactivateSelectorButton } = useSelectorStore();
 
   // const [isActive, setIsActive] = useState(false);
   const [hoveredElement, setHoveredElement] = useState(null);
@@ -26,7 +26,7 @@ const SelectorTool = forwardRef( (props, ref) => {
       setRevealed((prev) => !prev)
       console.log("uuugh")
       // setIsActive((prev) => !prev);
-      deactivateButton();
+      deactivateSelectorButton();
     }
   }));
 
@@ -36,8 +36,20 @@ const SelectorTool = forwardRef( (props, ref) => {
     const handleMouseOver = (event) => {
       const target = event.target;
 
+// console.log("?????");
+
       // Prevent highlighting the toggle button itself
-      if (target.closest("#toolsShelf")) return;
+      // if (target.closest("#toolsShelf")) return;
+
+      const mainElement = event.target.closest('#content-main');
+
+      // if (mainElement && mainElement === document.body 
+      //   || mainElement === document.documentElement
+      //   || mainElement?.id === "site" ) {
+      //   return;
+      // }
+
+
       // if (target.id === "inspector-toggle" || target.id === "tools") return;
 
       setHoveredElement(target);
@@ -45,28 +57,60 @@ const SelectorTool = forwardRef( (props, ref) => {
     };
 
 
-    const handleClick = (event) => {
+    const handleMouseDown = (event) => {
       event.preventDefault(); // Prevent default clicks
-      // const mainElement = event.target.closest('#content-main');
-      const mainElement = event.target.closest('#site');
+      const mainElement = event.target.closest('#content-main');
+      // const mainElement = event.target.closest('#site');
 
+        // console.log("event.target", event.target);
+        // console.log("mainElement", mainElement);
       // if (event.target.id !== "inspector-toggle") {
         // debugger
-      if(mainElement){
-        setSelectedElement(event.target);
-        console.log("event.target", event.target);
-        // setIsActive(false);
-        deactivateButton();
+      // if(mainElement){
+
+      console.log("111event.target", event.target);
+      console.log("111mainElement", mainElement);
+
+      let pick = event.target;
+      // debugger
+      if(mainElement === null && event?.target?.id === "site"){
+        pick = document.getElementById("content-main");
       }
+      else if(pick === document.body || pick === document.documentElement){
+        return;
+      }
+        setSelectedElement(pick);
+        
+        deactivateSelectorButton();
+
+      console.log("pick", pick);
+
+
+      // this might break it
+      //       document.removeEventListener("mouseover", handleMouseOver);
+      // document.removeEventListener("mousedown", handleMouseDown);
+
+
+
+      // if(event.target?.id === "content-main" || mainElement){
+      //   console.log("222event.target", event.target);
+      //   console.log("222mainElement", mainElement);
+      // }
+
+      // if (mainElement && mainElement !== document.body && mainElement !== document.documentElement) {
+      //   setSelectedElement(event.target);
+      //   // setIsActive(false);
+      //   deactivateSelectorButton();
+      // }
     };
 
 
     document.addEventListener("mouseover", handleMouseOver);
-    document.addEventListener("click", handleClick);
+    document.addEventListener("mousedown", handleMouseDown);
 
     return () => {
       document.removeEventListener("mouseover", handleMouseOver);
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener("mousedown", handleMouseDown);
     };
   }, [isSelectorActive, setSelectedElement]);
 
@@ -110,6 +154,7 @@ const SelectorTool = forwardRef( (props, ref) => {
         >
           {hoveredElement.tagName.toLowerCase()}
           {hoveredElement.className && `.${hoveredElement.className}`}
+          {hoveredElement?.id && `.${hoveredElement?.id}`}
         </div>
       )}
     </div>

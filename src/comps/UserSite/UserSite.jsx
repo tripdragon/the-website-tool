@@ -11,6 +11,7 @@ export default function UserSite() {
 
 
     <div id="site">
+    {/*    <div id="site" style={{ pointerEvents: 'none' }}> */}
     
       <style id="inlinestylesheet">
       {`

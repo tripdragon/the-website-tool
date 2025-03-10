@@ -32,10 +32,30 @@ export default function AddDivButton() {
   // };
 
   const add = () => {
+
     if (selectedElement) {
+
       const newDiv = document.createElement('div');
       newDiv.classList.add('new-box');
-      selectedElement.appendChild(newDiv);  // Append new div to the selected element
+      newDiv.setAttribute('contenteditable', 'true');
+      const uniqueId = `box-${Math.random().toString(36).substr(2, 9)}`;
+      newDiv.setAttribute('id', uniqueId);
+      selectedElement.appendChild(newDiv);
+
+
+      // update the style sheet
+      const styleElement = document.getElementById("inlinestylesheet");
+      const styleSheet = [...document.styleSheets].find(sheet => sheet.ownerNode === styleElement);
+
+      if (styleSheet) {
+        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        
+        styleSheet.insertRule(`#${uniqueId} { border:solid 1px ${randomColor} }`, styleSheet.cssRules.length);
+
+        // Update the text content of the <style> element to reflect the changes
+        styleElement.textContent = [...styleSheet.cssRules].map(rule => rule.cssText).join("\n");
+      }
+
     }
   };
 

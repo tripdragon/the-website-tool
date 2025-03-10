@@ -5,8 +5,12 @@ export const useSelectorStore = create((set) => ({
   setSelectedElement: (element) => set({ selectedElement: element }),
 
   isSelectorActive: false,
-  activateButton: () => set({ isSelectorActive: true }),
-  deactivateButton: () => set({ isSelectorActive: false })
+  activateSelectorButton: () => set({ isSelectorActive: true }),
+  deactivateSelectorButton: () => set({ isSelectorActive: false }),
+
+  isStyleEditorActive: false,
+  activateStyleEditorButton: () => set({ isStyleEditorActive: true }),
+  deactivateStyleEditorButton: () => set({ isStyleEditorActive: false })
 
 
 }));

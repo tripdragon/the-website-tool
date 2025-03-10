@@ -8,7 +8,7 @@ export default function ToggleSelector({ target }) {
 
   // const [isActive, setIsActive] = useState(false);
 
-  const { isSelectorActive, activateButton } = useSelectorStore();
+  const { isSelectorActive, activateSelectorButton, deactivateSelectorButton } = useSelectorStore();
 
 
   const toggle = () => {
@@ -19,13 +19,14 @@ export default function ToggleSelector({ target }) {
       
       target.current.toggle();
       
-      // activateButton();
+      // activateSelectorButton();
       // setIsActive((prev) => !prev);
       
-      activateButton();
+      activateSelectorButton();
 
     } else {
       console.warn("Target is not set or does not have a toggle method.");
+      // deactivateSelectorButton();
     }
   };
 

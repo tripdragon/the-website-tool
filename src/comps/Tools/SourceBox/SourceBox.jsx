@@ -11,6 +11,7 @@ const SourceBox = forwardRef(({ targetId }, ref) => {
       setRevealed((prev) => !prev);
       console.log("SourceBox visibility toggled");
     },
+    // called externally
     refreshSourceCode: () => {
       updateSourceCode();
     }
@@ -27,11 +28,16 @@ const SourceBox = forwardRef(({ targetId }, ref) => {
     const element = document.getElementById(targetId);
     if (element) {
       // Set the initial formatted source code
-      setSourceCode(prettifyHTML(element.innerHTML));
+
+      // note its outer here to get the initial full wrapper
+      // hmmmm
+      // setSourceCode(prettifyHTML(element.innerHTML));
+      setSourceCode(prettifyHTML(element.outerHTML));
 
       // Event listener for content changes
       const handleInputChange = () => {
-        setSourceCode(prettifyHTML(element.innerHTML)); // Pretty print updated HTML
+        // setSourceCode(prettifyHTML(element.innerHTML)); // Pretty print updated HTML
+        setSourceCode(prettifyHTML(element.outerHTML)); // Pretty print updated HTML
       };
 
       element.addEventListener('input', handleInputChange);
@@ -49,14 +55,16 @@ const SourceBox = forwardRef(({ targetId }, ref) => {
     // Update the contenteditable div with formatted code
     const element = document.getElementById(targetId);
     if (element) {
-      element.innerHTML = updatedCode;
+      // element.innerHTML = updatedCode;
+      element.outerHTML = updatedCode;
     }
   };
 
   const updateSourceCode = () => {
     const element = document.getElementById(targetId);
     if (element) {
-      setSourceCode(prettifyHTML(element.innerHTML));
+      // setSourceCode(prettifyHTML(element.innerHTML));
+      setSourceCode(prettifyHTML(element.outerHTML));
     }
   };
 
