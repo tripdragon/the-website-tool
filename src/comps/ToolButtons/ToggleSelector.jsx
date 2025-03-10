@@ -1,16 +1,28 @@
 
 import { useState, useEffect } from "react";
 
+import {useSelectorStore} from '@stores/selectorStore';
+
 
 export default function ToggleSelector({ target }) {
 
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
+
+  const { isSelectorActive, activateButton } = useSelectorStore();
+
 
   const toggle = () => {
-      // debugger
+    
+
     if (target.current && typeof target.current.toggle === "function") {
+      
+      
       target.current.toggle();
-              setIsActive((prev) => !prev);
+      
+      // activateButton();
+      // setIsActive((prev) => !prev);
+      
+      activateButton();
 
     } else {
       console.warn("Target is not set or does not have a toggle method.");
@@ -21,9 +33,9 @@ export default function ToggleSelector({ target }) {
         id="inspector-toggle"
         onClick={toggle}
         style={{
-          backgroundColor: isActive ? "#ff4d4d" : "#007bff",
+          backgroundColor: isSelectorActive ? "#ff4d4d" : "#007bff",
         }}
       >
-        {isActive ? "☛" : "♪"}
+        {isSelectorActive ? "☛" : "♪"}
       </button>
 }

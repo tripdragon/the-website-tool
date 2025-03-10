@@ -5,11 +5,14 @@ import { useSelectorStore } from "@stores/selectorStore.js";
 
 import './selectortool.scss';
 
+
+
 // export default function SelectorTool() {
 const SelectorTool = forwardRef( (props, ref) => {
 
+  const { isSelectorActive, deactivateButton } = useSelectorStore();
 
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
   const [hoveredElement, setHoveredElement] = useState(null);
   const [rect, setRect] = useState(null);
 
@@ -17,17 +20,18 @@ const SelectorTool = forwardRef( (props, ref) => {
 
   const [revealed, setRevealed] = useState(false);
 
-
+  // this sends to 
   useImperativeHandle(ref, () => ({
     toggle: () => {
       setRevealed((prev) => !prev)
       console.log("uuugh")
-      setIsActive((prev) => !prev);
+      // setIsActive((prev) => !prev);
+      deactivateButton();
     }
   }));
 
   useEffect(() => {
-    if (!isActive) return;
+    if (!isSelectorActive) return;
 
     const handleMouseOver = (event) => {
       const target = event.target;
@@ -43,9 +47,16 @@ const SelectorTool = forwardRef( (props, ref) => {
 
     const handleClick = (event) => {
       event.preventDefault(); // Prevent default clicks
-      if (event.target.id !== "inspector-toggle") {
+      // const mainElement = event.target.closest('#content-main');
+      const mainElement = event.target.closest('#site');
+
+      // if (event.target.id !== "inspector-toggle") {
+        // debugger
+      if(mainElement){
         setSelectedElement(event.target);
         console.log("event.target", event.target);
+        // setIsActive(false);
+        deactivateButton();
       }
     };
 
@@ -57,7 +68,7 @@ const SelectorTool = forwardRef( (props, ref) => {
       document.removeEventListener("mouseover", handleMouseOver);
       document.removeEventListener("click", handleClick);
     };
-  }, [isActive, setSelectedElement]);
+  }, [isSelectorActive, setSelectedElement]);
 
 
   return (
@@ -72,7 +83,7 @@ const SelectorTool = forwardRef( (props, ref) => {
       {/*  {isActive ? "♪" : "☛"}
       </button>*/}
 
-      {isActive && rect && (
+      {isSelectorActive && rect && (
         <div className="is-active"
           style={{
             top: rect.top + window.scrollY,
@@ -83,7 +94,7 @@ const SelectorTool = forwardRef( (props, ref) => {
         />
       )}
 
-      {isActive && hoveredElement && (
+      {isSelectorActive && hoveredElement && (
         <div
           style={{
             position: "fixed",

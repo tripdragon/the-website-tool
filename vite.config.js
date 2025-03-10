@@ -12,5 +12,9 @@ export default defineConfig({
       '@tools' : '/src/comps/Tools'
     },
   },
+  server: {
+    // open: true, // Automatically open the app on startup
+    hmr: true,  // Hot Module Replacement (should be enabled by default)
+  },
 
 })

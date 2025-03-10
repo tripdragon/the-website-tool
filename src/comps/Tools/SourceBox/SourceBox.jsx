@@ -1,56 +1,30 @@
-import { forwardRef, useState, useEffect, useImperativeHandle } from 'react'
-
-// import { useInView} from "react-intersection-observer";
-
-
+import { forwardRef, useState, useEffect, useImperativeHandle } from 'react';
 import './sourcebox.scss';
 
-
-const SourceBox = forwardRef( ({ targetId }, ref) => {
-
+const SourceBox = forwardRef(({ targetId }, ref) => {
   const [sourceCode, setSourceCode] = useState('');
-
   const [revealed, setRevealed] = useState(false);
 
-  // const toggle = () => setRevealed((prev) => !prev);
-
-    // Expose a `toggle` method for the parent component
+  // Expose methods to the parent component
   useImperativeHandle(ref, () => ({
     toggle: () => {
-      setRevealed((prev) => !prev)
-      console.log("uuugh")
+      setRevealed((prev) => !prev);
+      console.log("SourceBox visibility toggled");
+    },
+    refreshSourceCode: () => {
+      updateSourceCode();
     }
   }));
 
-
   // Function to prettify the HTML without <body> and unwanted xmlns attributes
   const prettifyHTML = (html) => {
-    // debugger
-    return html;
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
-    // const yy = doc.body.innerHTML.replace(/></g, ">\n<");
-    // console.log(yy)
     return doc.body.innerHTML.replace(/></g, ">\n<"); // Adds line breaks
-  }
-
-
-  // const { ref, inView, entry } = useInView({
-  //   /* Optional options */
-  //   threshold: 0,
-  // });
-
-
-  useEffect(() => {
-    if (revealed) {
-      console.log("SourceBox is now visible");
-    }
-  }, [revealed]);
-
+  };
 
   useEffect(() => {
     const element = document.getElementById(targetId);
-
     if (element) {
       // Set the initial formatted source code
       setSourceCode(prettifyHTML(element.innerHTML));
@@ -82,7 +56,6 @@ const SourceBox = forwardRef( ({ targetId }, ref) => {
   const updateSourceCode = () => {
     const element = document.getElementById(targetId);
     if (element) {
-      // setSourceCode(element.outerHTML);
       setSourceCode(prettifyHTML(element.innerHTML));
     }
   };
@@ -95,9 +68,7 @@ const SourceBox = forwardRef( ({ targetId }, ref) => {
         rows={10}
         cols={50}
         style={{ fontFamily: "monospace", whiteSpace: "pre" }}
-
       />
-
     </div>
   );
 });

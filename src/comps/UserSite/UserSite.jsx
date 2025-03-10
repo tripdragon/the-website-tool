@@ -21,7 +21,9 @@ export default function UserSite() {
       `}
       </style>
 
-      <h2 contentEditable="true">Fiiiish</h2>
+      <div id="content-main">
+        <h2 contentEditable="true">Fiiiish</h2>
+      </div>
 
     </div>
 

@@ -4,13 +4,17 @@ import './toolsShelf.scss';
 
 export default function ToolsShelf(props) {
   const [dragging, setDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState(props.position || { x: 0, y: 0 });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const lastX = useRef(0);
   const lastY = useRef(0);
 
   const _toolShelf = useRef();
   const _handle = useRef();
+
+  
+
+
 
   useEffect(() => {
     const handleElement = _handle.current;
