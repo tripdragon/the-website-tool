@@ -15,15 +15,14 @@ export default function UserSite() {
     
       <style id="inlinestylesheet">
       {`
-        #site{
-          border: solid 1px green;
-        }
-
+        
+        #placeh2{}
+        #content-main{border: solid 1px green;}
       `}
       </style>
 
       <div id="content-main">
-        <h2 contentEditable="true">Fiiiish</h2>
+        <h2 contentEditable="true" id="placeh2">Fiiiish</h2>
       </div>
 
     </div>

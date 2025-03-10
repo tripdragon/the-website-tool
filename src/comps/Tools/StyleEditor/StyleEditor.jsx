@@ -67,8 +67,10 @@ const StyleEditor = forwardRef((_, ref) => {
         const yy = cssRuleToObject(bb);
         setStyleObject(yy);
       }
-      else{
-        setSourceCode('_');
+      else if (selectedElement){
+
+        const bb = `#${selectedElement?.id} { }`;
+        setSourceCode(bb);
       }
     }
     else {
@@ -145,29 +147,6 @@ const StyleEditor = forwardRef((_, ref) => {
   //   return doc.body.innerHTML.replace(/></g, ">\n<"); // Adds line breaks
   // };
 
-  // useEffect(() => {
-  //   const element = document.getElementById(targetId);
-  //   if (element) {
-  //     // Set the initial formatted source code
-
-  //     // note its outer here to get the initial full wrapper
-  //     // hmmmm
-  //     // setSourceCode(prettifyHTML(element.innerHTML));
-  //     setSourceCode(prettifyHTML(element.outerHTML));
-
-  //     // Event listener for content changes
-  //     const handleInputChange = () => {
-  //       // setSourceCode(prettifyHTML(element.innerHTML)); // Pretty print updated HTML
-  //       setSourceCode(prettifyHTML(element.outerHTML)); // Pretty print updated HTML
-  //     };
-
-  //     element.addEventListener('input', handleInputChange);
-
-  //     return () => {
-  //       element.removeEventListener('input', handleInputChange);
-  //     };
-  //   }
-  // }, [targetId]);
 
   const handleSourceCodeChange = (e) => {
     const updatedCode = e.target.value;
@@ -178,14 +157,9 @@ const StyleEditor = forwardRef((_, ref) => {
     const yy = cssRuleToObject(updatedCode);
     setStyleObject(yy);
 
+    console.log("yy", yy);
     sendToStyleSheet(yy);
 
-    // // Update the contenteditable div with formatted code
-    // const element = document.getElementById(targetId);
-    // if (element) {
-    //   // element.innerHTML = updatedCode;
-    //   element.outerHTML = updatedCode;
-    // }
   };
 
 
