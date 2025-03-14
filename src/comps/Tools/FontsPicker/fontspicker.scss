@@ -1,0 +1,50 @@
+// #fontsPicker {
+//   width: 200px;
+//   padding: 8px;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+//   background-color: white;
+//   font-size: 16px;
+//   cursor: pointer;
+
+//   &:focus {
+//     outline: none;
+//     border-color: #007bff;
+//     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+//   }
+// }
+
+
+#fontsPicker {
+  position: relative;
+  display: inline-block;
+
+  .picker-button {
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: white;
+  }
+
+  .picker-dropdown {
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    background: white;
+    width: 450px;
+  }
+
+  .picker-dropdown li {
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  .picker-dropdown li:hover {
+    background: #f0f0f0;
+  }
+
+
+}

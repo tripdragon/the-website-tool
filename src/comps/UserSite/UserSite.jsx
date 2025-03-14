@@ -17,7 +17,9 @@ export default function UserSite() {
       {`
         
         #placeh2{}
-        #content-main{border: solid 1px green;}
+        #content-main{
+          color: black;
+        }
       `}
       </style>
 
